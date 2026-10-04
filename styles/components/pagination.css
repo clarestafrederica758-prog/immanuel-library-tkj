@@ -1,0 +1,39 @@
+/* =============================================
+   COMPONENT: PAGINATION
+   Navigasi sederhana: tombol sebelumnya ( < ) & berikutnya ( > ) saja.
+   ============================================= */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 16px 0 4px;
+}
+
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background-color: var(--card);
+  color: var(--ink);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.pagination-btn:hover {
+  border-color: var(--cloth);
+  color: var(--cloth);
+}
+
+.pagination-btn.is-disabled {
+  color: var(--line);
+  background-color: var(--card-alt);
+  cursor: default;
+  pointer-events: none;
+}

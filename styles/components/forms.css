@@ -1,0 +1,60 @@
+/* =============================================
+   COMPONENT: FORMS
+   Dipakai di form manajemen (create/edit) DAN halaman auth (login/register).
+   ============================================= */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-soft);
+  margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 13px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  font-size: 14px;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background-color: var(--card);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--cloth);
+  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.14);
+}
+
+.form-group input:disabled {
+  background-color: var(--card-alt);
+  color: var(--ink-soft);
+}
+
+.form-row {
+  display: flex;
+  gap: 14px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-help {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+}
