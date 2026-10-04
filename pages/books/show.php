@@ -9,6 +9,9 @@
 <body>
   <?php
   require '../../repositories/book-repository.php';
+
+  $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
+  $book = getBook($id);
   ?>
   <div class="app-shell">
   <?php require_once __DIR__ . '/../../components/admin/sidebar.php'; ?>

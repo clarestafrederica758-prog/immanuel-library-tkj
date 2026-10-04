@@ -53,3 +53,22 @@ $book = [
   "description" => "Kumpulan puisi dan cerita pendek dari berbagai penulis Nusantara.",
   "authors" => ["Pramoedya Ananta Toer", "Sapardi Djoko Damono"],
 ];
+
+function getBooks()
+{
+    global $books;
+    return $books;
+}
+
+function getBook($id)
+{
+    global $books;
+
+    foreach ($books as $book) {
+        if ($book['id'] === $id) {
+            return $book;
+        }
+    }
+
+    return null;
+}
