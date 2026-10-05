@@ -7,17 +7,41 @@
   <link rel="stylesheet" href="../../styles/books/edit.css">
 </head>
 <body>
-    <?php
-    require '../../repositories/book-repository.php';
 
-    $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
-    $book = getBook($id);
+  <?php
+  require '../../repositories/book-repository.php';
+  require '../../repositories/category-repository.php';
+  require '../../repositories/author-repository.php';
 
-    if ($book === null) {
-    echo "Buku tidak ditemukan.";
-    exit;
-    }
-    ?>
+  $id = isset($_GET['id']) ? (int) $_GET['id'] : 1;
+  $book = getBook($id);
+
+  if ($book === null) {
+      echo "Buku tidak ditemukan.";
+      exit;
+  }
+
+  $categories = getCategories();
+  $authors = getAuthors();
+
+  $categoryId = null;
+
+  foreach ($categories as $category) {
+      if ($category['name'] === $book['category']) {
+          $categoryId = $category['id'];
+          break;
+      }
+  }
+
+  $authorIds = [];
+
+  foreach ($authors as $author) {
+      if (in_array($author['name'], $book['authors'])) {
+          $authorIds[] = $author['id'];
+      }
+  }
+  ?>
+
   <div class="app-shell">
   <?php require_once __DIR__ . '/../../components/admin/sidebar.php'; ?>
 
@@ -30,66 +54,120 @@
 
       <div class="app-content">
         <form method="POST" action="../../actions/books/update.php">
+
           <input type="hidden" name="id" value="<?= $book['id'] ?>">
+
           <div class="form-card" style="margin-bottom:20px;">
             <div class="form-section-title">Data Buku</div>
+
             <div class="form-group">
               <label for="title">Judul Buku</label>
-              <input type="text" id="title" name="title" value="<?= $book['title'] ?>">
+              <input
+                type="text"
+                id="title"
+                name="title"
+                value="<?= $book['title'] ?>"
+              >
             </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="isbn">ISBN</label>
-                <input type="text" id="isbn" name="isbn" value="<?= $book['isbn'] ?>">
+                <input
+                  type="text"
+                  id="isbn"
+                  name="isbn"
+                  value="<?= $book['isbn'] ?? '' ?>"
+                >
               </div>
+
               <div class="form-group">
                 <label for="year">Tahun Terbit</label>
-                <input type="number" id="year" name="year" value="<?= $book['year'] ?>">
+                <input
+                  type="number"
+                  id="year"
+                  name="year"
+                  value="<?= $book['year'] ?>"
+                >
               </div>
             </div>
+
             <div class="form-row">
               <div class="form-group">
                 <label for="stock">Jumlah Stok</label>
-                <input type="number" id="stock" name="stock" value="<?= $book['stock'] ?>">
+                <input
+                  type="number"
+                  id="stock"
+                  name="stock"
+                  value="<?= $book['stock'] ?>"
+                >
               </div>
+
               <div class="form-group">
                 <label for="category_id">Kategori</label>
                 <select id="category_id" name="category_id">
-                  <?php foreach ($categories as $index => $category): ?>
-                    <option value="<?= $index + 1 ?>" <?= ($index + 1) === $book['category_id'] ? 'selected' : '' ?>><?= $category ?></option>
+
+                  <?php foreach ($categories as $category): ?>
+                    <option
+                      value="<?= $category['id'] ?>"
+                      <?= $category['id'] === $categoryId ? 'selected' : '' ?>
+                    >
+                      <?= $category['name'] ?>
+                    </option>
                   <?php endforeach; ?>
+
                 </select>
               </div>
             </div>
+
             <div class="form-group">
               <label for="description">Deskripsi</label>
-              <textarea id="description" name="description" rows="3"><?= $book['description'] ?></textarea>
+              <textarea
+                id="description"
+                name="description"
+                rows="3"
+              ><?= $book['description'] ?? '' ?></textarea>
             </div>
           </div>
 
           <div class="form-card">
             <div class="form-section-title">Penulis Buku</div>
+
             <div class="form-group">
               <label>Pilih Penulis (bisa lebih dari satu)</label>
+
               <div class="checkbox-grid">
-                <?php foreach ($authors as $index => $authorName): ?>
-                  <?php $authorId = $index + 1; ?>
+
+                <?php foreach ($authors as $author): ?>
                   <label class="checkbox-item">
-                    <input type="checkbox" name="author_ids[]" value="<?= $authorId ?>" <?= in_array($authorId, $book['author_ids']) ? 'checked' : '' ?>>
-                    <?= $authorName ?>
+
+                    <input
+                      type="checkbox"
+                      name="author_ids[]"
+                      value="<?= $author['id'] ?>"
+                      <?= in_array($author['id'], $authorIds) ? 'checked' : '' ?>
+                    >
+
+                    <?= $author['name'] ?>
+
                   </label>
                 <?php endforeach; ?>
+
               </div>
             </div>
 
             <div class="form-actions">
               <a href="index.php" class="btn btn-outline">Batal</a>
-              <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+              <button type="submit" class="btn btn-primary">
+                Simpan Perubahan
+              </button>
             </div>
           </div>
+
         </form>
       </div>
     </main>
   </div>
+
 </body>
 </html>
