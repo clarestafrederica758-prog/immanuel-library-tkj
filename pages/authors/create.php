@@ -18,7 +18,7 @@
     ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="POST" action="../../actions/authors/store.php">
           <div class="form-card">
             <div class="form-section-title">Data Penulis</div>
             <div class="form-group">
