@@ -27,7 +27,8 @@
     ?>
 
       <div class="app-content">
-        <form method="" action="">
+        <form method="POST" action="../../actions/books/store.php">
+
           <div class="form-card" style="margin-bottom:20px;">
             <div class="form-section-title">Data Buku</div>
 
@@ -56,50 +57,96 @@
 
               <div class="form-group">
                 <label for="category_id">Kategori</label>
+
                 <select id="category_id" name="category_id">
+
                   <?php foreach ($categories as $category): ?>
+
                     <option value="<?= $category['id'] ?>">
                       <?= $category['name'] ?>
                     </option>
+
                   <?php endforeach; ?>
+
                 </select>
               </div>
             </div>
 
             <div class="form-group">
               <label for="description">Deskripsi</label>
-              <textarea id="description" name="description" rows="3" placeholder="Sinopsis singkat buku"></textarea>
+
+              <textarea
+                id="description"
+                name="description"
+                rows="3"
+                placeholder="Sinopsis singkat buku"
+              ></textarea>
             </div>
+
           </div>
 
           <div class="form-card">
-            <div class="form-section-title">Penulis Buku</div>
+
+            <div class="form-section-title">
+              Penulis Buku
+            </div>
 
             <div class="form-group">
-              <label>Pilih Penulis (bisa lebih dari satu)</label>
+
+              <label>
+                Pilih Penulis (bisa lebih dari satu)
+              </label>
 
               <div class="checkbox-grid">
+
                 <?php foreach ($authors as $author): ?>
+
                   <label class="checkbox-item">
+
                     <input
                       type="checkbox"
                       name="author_ids[]"
                       value="<?= $author['id'] ?>"
                     >
+
                     <?= $author['name'] ?>
+
                   </label>
+
                 <?php endforeach; ?>
+
               </div>
+
             </div>
 
             <div class="form-actions">
-              <a href="index.php" class="btn btn-outline">Batal</a>
-              <button type="submit" class="btn btn-primary">Simpan Buku</button>
+
+              <a
+                href="index.php"
+                class="btn btn-outline"
+              >
+                Batal
+              </a>
+
+              <button
+                type="submit"
+                name="store"
+                value="1"
+                class="btn btn-primary"
+              >
+                Simpan Buku
+              </button>
+
             </div>
+
           </div>
+
         </form>
+
       </div>
+
     </main>
+
   </div>
 
 </body>

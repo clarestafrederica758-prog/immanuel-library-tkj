@@ -4,6 +4,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Metode request tidak valid.');
 }
 
+if (!isset($_POST['store'])) {
+    exit('Aksi penyimpanan tidak ditemukan.');
+}
+
 if (!isset($_POST['name'])) {
     exit('Nama kategori tidak ditemukan.');
 }

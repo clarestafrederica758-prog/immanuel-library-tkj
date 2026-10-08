@@ -4,6 +4,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Metode request tidak valid.');
 }
 
+if (!isset($_POST['update'])) {
+    exit('Aksi pembaruan tidak ditemukan.');
+}
+
 if (!isset($_POST['id'])) {
     exit('ID pengguna tidak ditemukan.');
 }

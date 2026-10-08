@@ -4,6 +4,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('Metode request tidak valid.');
 }
 
+if (!isset($_POST['update'])) {
+    exit('Aksi pembaruan tidak ditemukan.');
+}
+
 if (!isset($_POST['name'], $_POST['email'], $_POST['phone'], $_POST['address'], $_POST['bio'])) {
     exit('Data profil tidak lengkap.');
 }
